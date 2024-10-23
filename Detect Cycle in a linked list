@@ -1,0 +1,45 @@
+  bool hasCycle(ListNode *head) {
+    //     //APPROACH -1 
+    //     //USING UNORDERED MAP
+    //     if(head == NULL || head->next == NULL){
+    //         return false;
+    //     }
+    //     map<ListNode*, bool> visited;
+    //     ListNode* temp = head;
+    //     //traverse the linked list and check if that particular node's address has occured previously
+
+    //     while(temp!=NULL){
+    //         if(visited[temp] == true){
+    //             return true;
+    //         }
+    //         visited[temp] = true;
+    //         temp=temp->next;
+    //     }
+
+    // return false;
+
+    //APPROACH - 2
+    //FLOYD CYCLE DETECTION
+    //WE PUT SLOW AND FAST POINTERS ON HEAD
+    //FAST MOVES 2 STEPS AND SLOW MOVES 1 STEP
+    //IF FAST AND SLOW MEET IT MEANS LOOP IS PRESENT OTHERWISE LOOP IS NOT PRESENT 
+    if(head == NULL){
+        return false;
+    }
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while(fast != NULL){
+        fast = fast->next;
+        if(fast!=NULL){
+            fast = fast->next;
+            slow = slow->next;
+        }
+         if(slow == fast){
+        //loop present
+        return true;
+    }
+    }
+   
+      //fast NULL hoga
+    return false;
+    }
